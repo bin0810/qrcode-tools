@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <title>二维码工具</title>
+</head>
+<body>
+<div class="container">
+    <div class="item">
+        <h1>二维码生成</h1>
+        <form method="post" action="/qr/genrate">
+            <input type="text" style="width: 45%;" name="info" placeholder="请输入生成二维码原始信息"  value="{{ user_in }}">
+            <input type="submit" value="生成">
+        </form>
+        <div>
+            <hr/>
+            {% if qr_image %}
+            <img src="{{url_for('static', filename='generate/' + qr_image)}}" width="15%"><br>
+            {% endif %}
+        </div>
+    </div>
+    <div class="item">
+        <h1>二维码识别</h1>
+        <form method="post" action="/qr/upload" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="上传">
+        </form>
+        <div>
+            <hr/>
+            {{ info }}
+        </div>
+    </div>
+</div>
+</body>
+</html>
